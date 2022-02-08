@@ -1,4 +1,9 @@
-/* eslint-env jasmine, jest */
+/**
+ * Copyright (c) Nicolas Gallagher.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 import createDOMProps from '..';
 
@@ -113,43 +118,6 @@ describe('modules/createDOMProps', () => {
     expect(props.role).toEqual('button');
   });
 
-  describe('prop "accessibilityState"', () => {
-    function createAccessibilityState(value) {
-      return {
-        busy: value,
-        checked: value,
-        disabled: value,
-        expanded: value,
-        grabbed: value,
-        hidden: value,
-        invalid: value,
-        modal: value,
-        pressed: value,
-        readonly: value,
-        required: value,
-        selected: value
-      };
-    }
-
-    test('values are "undefined"', () => {
-      const accessibilityState = createAccessibilityState(undefined);
-      const props = createProps({ accessibilityState });
-      expect(props).toMatchSnapshot();
-    });
-
-    test('values are "false"', () => {
-      const accessibilityState = createAccessibilityState(false);
-      const props = createProps({ accessibilityState });
-      expect(props).toMatchSnapshot();
-    });
-
-    test('values are "true"', () => {
-      const accessibilityState = createAccessibilityState(true);
-      const props = createProps({ accessibilityState });
-      expect(props).toMatchSnapshot();
-    });
-  });
-
   test('prop "className" is preserved', () => {
     const className = 'external-class-name';
     const props = createProps({ className });
@@ -169,14 +137,18 @@ describe('modules/createDOMProps', () => {
   });
 
   test('includes cursor style for pressable roles', () => {
-    expect(createDOMProps('span', { accessibilityRole: 'link' }).className).toMatchSnapshot();
-    expect(createDOMProps('span', { accessibilityRole: 'button' }).className).toMatchSnapshot();
+    expect(createDOMProps('span', { accessibilityRole: 'link' }).className).toMatchInlineSnapshot(
+      'undefined'
+    );
+    expect(createDOMProps('span', { accessibilityRole: 'button' }).className).toMatchInlineSnapshot(
+      'undefined'
+    );
   });
 
   test('includes base reset style for browser-styled elements', () => {
-    expect(createDOMProps('a').className).toMatchSnapshot();
-    expect(createDOMProps('button').className).toMatchSnapshot();
-    expect(createDOMProps('li').className).toMatchSnapshot();
-    expect(createDOMProps('ul').className).toMatchSnapshot();
+    expect(createDOMProps('a').className).toMatchInlineSnapshot('undefined');
+    expect(createDOMProps('button').className).toMatchInlineSnapshot('undefined');
+    expect(createDOMProps('li').className).toMatchInlineSnapshot('undefined');
+    expect(createDOMProps('ul').className).toMatchInlineSnapshot('undefined');
   });
 });
